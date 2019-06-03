@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Select, InputNumber, Switch, Radio, Slider, Button, Upload,   
-     Icon, Rate, Checkbox, Row, Col, Layout, Typography} from 'antd';
+     Icon, Rate, Checkbox, Row, Col, Layout, Typography, Input} from 'antd';
 import './App.css';
 
      const { Option } = Select;
@@ -33,11 +33,17 @@ class Passagens extends React.Component {
             wrapperCol: { span: 14 },
             };
     return (              
-        <Layout style={{ background: '#fff', padding: 0 }}>
+        <Layout style={{ background: '#fff', padding: 100 }}>
                 <Header style={{ background: '#fff', padding: 0 }}>
-                  <Title className="titulo">Passagens aéreas</Title>
+                  <Title style={{textAlign: 'center' }}>Passagens aéreas</Title>
                 </Header>
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>                   
+            <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{ padding: 50 }}>                   
+                        <Form.Item label={<span> Nome&nbsp; </span> }>                                
+                        {getFieldDecorator('nome', {
+                            rules: [{ required: true, message: 'Insira o seu nome!', whitespace: true }],})
+                        (<Input />)}
+                        </Form.Item>
+                    
                     <Form.Item label="Select" hasFeedback>
                     {getFieldDecorator('select', {
                         rules: [{ required: true, message: 'Please select your country!' }],
@@ -63,9 +69,9 @@ class Passagens extends React.Component {
                 )}
                 </Form.Item>
 
-                <Form.Item label="InputNumber">
-                {getFieldDecorator('input-number', { initialValue: 3 })(<InputNumber min={1} max={10} />)}
-                <span className="ant-form-text"> machines</span>
+                <Form.Item label="Passageiros">
+                {getFieldDecorator('passageiros', { initialValue: 1 })(<InputNumber min={1} max={10} />)}
+                <span className="ant-form-text"> passageiros </span>
                 </Form.Item>
 
                 <Form.Item label="Radio.Group">
@@ -122,27 +128,10 @@ class Passagens extends React.Component {
                 })(<Rate />)}
                 </Form.Item>
 
-                <Form.Item label="Dragger">
-                <div className="dropbox">
-                    {getFieldDecorator('dragger', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: this.normFile,
-                    })(
-                    <Upload.Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-                    </Upload.Dragger>,
-                    )}
-                </div>
-                </Form.Item>
-
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
                 </Form.Item>
             </Form>
         </Layout>

@@ -2,16 +2,14 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.css'; 
-import { Layout, Menu, Breadcrumb ,Button, Radio, Icon, Row, Col } from 'antd';
+import { Layout, Menu, Icon} from 'antd';
 import Hospedagens from './Hospedagens';
 import Passagens from './Passagens';
 import Pacotes from './Pacotes';
 import Home from './Home';
 
 
-const {  Header, Sider, Content  } = Layout;
-const logo = require('./imagens/bk3.svg');
-const ButtonGroup = Button.Group;
+const {Sider, Content  } = Layout;
 
 export default class App extends React.Component {
   state = {
@@ -54,12 +52,11 @@ export default class App extends React.Component {
         </Sider>
         <Layout>
           
-          <Content
-            style={{
+          <Content style={{
               margin: '24px 16px',
               padding: 24,
               background: '#fff',
-              minHeight: 300}}
+              minHeight: 900}}
           >
             <Route path="/hospedagens/" component={Hospedagens} />
             <Route path="/passagens/" component={Passagens} />

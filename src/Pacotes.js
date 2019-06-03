@@ -32,11 +32,11 @@ class Pacotes extends React.Component {
             wrapperCol: { span: 14 },
             };
     return (              
-         <Layout style={{ background: '#fff', padding: 0 }}>
+         <Layout style={{ background: '#fff', padding: 100 }}>
                     <Header style={{ background: '#fff', padding: 0 }}>
-                    <Title className="titulo">Pacotes de viagens</Title>
+                    <Title style={{textAlign: 'center' }}>Pacotes de viagens</Title>
                     </Header>   
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>                   
+            <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{ padding: 50 }}>                   
                     <Form.Item label="Select" hasFeedback>
                     {getFieldDecorator('select', {
                         rules: [{ required: true, message: 'Please select your country!' }],
@@ -119,23 +119,6 @@ class Pacotes extends React.Component {
                 {getFieldDecorator('rate', {
                     initialValue: 3.5,
                 })(<Rate />)}
-                </Form.Item>
-
-                <Form.Item label="Dragger">
-                <div className="dropbox">
-                    {getFieldDecorator('dragger', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: this.normFile,
-                    })(
-                    <Upload.Dragger name="files" action="/upload.do">
-                        <p className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-                    </Upload.Dragger>,
-                    )}
-                </div>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
