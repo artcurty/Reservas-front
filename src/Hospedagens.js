@@ -25,7 +25,7 @@ class Hospedagens extends React.Component {
 
     componentDidMount() {   
 
-        axios.get('http://localhost:8080/**')
+        axios.get('http://localhost:8080/hoteis')
           .then(res => {
             const p = res.data;
             console.log(p);
@@ -38,6 +38,28 @@ class Hospedagens extends React.Component {
         console.log('evento' + evento);
       };
         
+
+    getChave(){
+        return this.chave++;
+      };
+      onAddItem = (evento) => {
+        evento.preventDefault();
+        axios.post('http://localhost:8080/hoteis',
+            JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
+            {headers: {'Content-Type': 'application/json'} })
+          .then(res => {      
+            const p = res.data;
+            this.setState({lista:p});
+          }).catch (error => {
+            console.log(error);
+          });   
+        this.setState({
+          nome: '',
+          email: '',        
+          senha: ''
+        });
+      };
+
     handleSubmit = e => {
                 e.preventDefault();
                 this.props.form.validateFields((err, values) => {
@@ -145,29 +167,24 @@ class Hospedagens extends React.Component {
     );
   }
 }
-const WrappedHospedagens = Form.create({ name: 'hospedagens' })(Hospedagens);
-
-export default WrappedHospedagens;
 
 class Linhas extends React.Component{
     constructor(props){
       super(props);
-    this.chave = 0;
-    };
-    
-    getChave(){
-      return this.chave++;
-    }
-  
+
+    };     
     render(){
       return(
         this.props.lista.map((a) => {
           return (
-            <tr key={this.getChave()}>
+            <tr>
               <td>{a.nome}</td>                             
             </tr>
                 );
               })
             );
-          }
+          };
     }
+const WrappedHospedagens = Form.create({ name: 'hospedagens' })(Hospedagens);
+
+export default WrappedHospedagens;
