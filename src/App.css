@@ -1,62 +1,22 @@
 
-.App {
-  text-align: center;
+.logo{
+  max-width: 100%;
+  height: 200px;
+  background-image: url(./imagens/bk3.svg);
+  background-position: 0px 10px;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.bk{
+  height: 100vh;  
+  background-image: url(./imagens/bk3.svg);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
 }
 
-.menu{
-  position: relative; 
-  height: 600px;
-
-}
-.hospedagens{
-  position: absolute;
-  left: 23.33%;
-  top: 500px;
-  width: 12%;
-
-}
-.passagens{
-  position: absolute; 
-  top: 500px;
-  width: 12%;
-}
-.pacotes{
-  position: absolute;
-  left: 66.66%;
-  top: 500px;
-  width: 12%;
-}
-
-.container{
-
-
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.titulo{
+  position: relative;
+  left: 43%;
 }

@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Galano Grotesque
+Author: Rene Bieder
+Url: https://www.fontsquirrel.com/fonts/galano-grotesque
+
+Font: Vibur
+Author: Johan Kallas
+Url: https://www.fontsquirrel.com/fonts/vibur
