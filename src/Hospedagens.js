@@ -24,7 +24,6 @@ class Hospedagens extends React.Component {
     }
 
     componentDidMount() {   
-
         axios.get('http://localhost:8080/hoteis')
           .then(res => {
             const p = res.data;
@@ -54,9 +53,7 @@ class Hospedagens extends React.Component {
             console.log(error);
           });   
         this.setState({
-          nome: '',
-          email: '',        
-          senha: ''
+          nome: ''
         });
       };
 
@@ -84,11 +81,8 @@ class Hospedagens extends React.Component {
             wrapperCol: { span: 14 },
             };
     return (              
-        <Layout style={{ background: '#fff', 
-        padding: 100 }}>
-            <Header style={{ background: '#fff', 
-        padding: 0 }}>
-
+        <Layout style={{ background: '#fff',padding: 100 }}>
+            <Header style={{ background: '#fff', padding: 0 }}>
                 <Title style={{textAlign: 'center'}}>Hospedagens</Title>
             </Header>
             <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{ padding: 50 }}>

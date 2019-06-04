@@ -9,7 +9,7 @@ import Pacotes from './Pacotes';
 import Home from './Home';
 
 
-const {Sider, Content  } = Layout;
+const {Sider, Content} = Layout;
 
 export default class App extends React.Component {
   state = {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
           <Link to="/">
           <div className="logo" />
           </Link>
-          <Menu  theme="dark" mode="inline" defaultSelectedKeys={['1']}>       
+          <Menu  theme="dark" mode="inline" >       
             <Menu.Item key="1">              
             <Link to="/hospedagens" >
               <Icon type="plus-square" />             
@@ -58,6 +58,7 @@ export default class App extends React.Component {
               background: '#fff',
               minHeight: 900}}
           >
+            <Route path="/" exact component={Home} />
             <Route path="/hospedagens/" component={Hospedagens} />
             <Route path="/passagens/" component={Passagens} />
             <Route path="/pacotes/" component={Pacotes} />           
@@ -65,41 +66,7 @@ export default class App extends React.Component {
           </Content>
         </Layout>
       </Layout>           
-    </Router>   
-        /*
-       <div id="container" >          
-           
-            <Router>      
-                    <div className="main">
-                        <div className="img-viagem" >
-                          <img src={logo}  alt="logo" id="img"></img>
-                        </div>     
-                        <div className="lateral">            
-                            <div className="header">                 
-                                <h1 className="text">RESERVAS UFPB</h1>    
-                                <p className="text">Escola a opção desejada abaixo: </p>                      
-                            </div>                                             
-                              <ButtonGroup className="menu">
-                                  <Button type="default" href="/hospedagens" ghost size ="large">                             
-                                    Hospedagens                             
-                                  </Button>                       
-                                  <Button type="default" href="/passagens" ghost size ="large">                             
-                                    Passagens                             
-                                  </Button>
-                                  <Button type="default" href="pacotes" ghost size ="large">                              
-                                    Pacotes                             
-                                  </Button>  
-                              </ButtonGroup>                              
-                        </div> 
-                  </div>   
-                  <div className="content">
-                    <Route path="/hospedagens/" component={Hospedagens} />
-                    <Route path="/passagens/" component={Passagens} />
-                    <Route path="/pacotes/" component={Pacotes} />
-                  </div>
-            </Router>             
-        </div> 
-        */        
+    </Router>           
       );
     };
 }
