@@ -220,8 +220,7 @@ export default class Home extends React.Component{
                     <tr>
                       <th>Nome</th>    
                       <th>Estrelas</th>                     
-                      <th>Estado</th>                     
-                 
+                      <th>Estado</th>                
                     </tr>
                   </thead>
                   <tbody>                 
