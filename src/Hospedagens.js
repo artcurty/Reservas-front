@@ -19,10 +19,7 @@ class Hospedagens extends React.Component {
                       };
     }    
     
-    componentWillUnmount() {
-
-    }
-
+   
     componentDidMount() {   
         axios.get('http://localhost:8080/hoteis')
           .then(res => {
@@ -37,26 +34,6 @@ class Hospedagens extends React.Component {
         console.log('evento' + evento);
       };
         
-
-    getChave(){
-        return this.chave++;
-      };
-      onAddItem = (evento) => {
-        evento.preventDefault();
-        axios.post('http://localhost:8080/hoteis',
-            JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
-            {headers: {'Content-Type': 'application/json'} })
-          .then(res => {      
-            const p = res.data;
-            this.setState({lista:p});
-          }).catch (error => {
-            console.log(error);
-          });   
-        this.setState({
-          nome: ''
-        });
-      };
-
     handleSubmit = e => {
                 e.preventDefault();
                 this.props.form.validateFields((err, values) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Form, Select, InputNumber, Switch, Radio, Slider, Button, Upload,   
-     Icon, Rate, Checkbox, Row, Col, Layout, Typography, Input} from 'antd';
+import {Form, Select, InputNumber, Radio, Button, 
+     Rate, Checkbox, Row, Col, Layout, Typography, Input} from 'antd';
 import './App.css';
 
      const { Option } = Select;

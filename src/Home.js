@@ -1,27 +1,40 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import 'antd/dist/antd.css'; 
-import { Layout, Select, Menu, Breadcrumb ,Button, Radio, Icon, Row, Col, Typography } from 'antd';
-import Hospedagens from './Hospedagens';
-import Passagens from './Passagens';
-import Pacotes from './Pacotes';
+import { Layout,Button, Typography } from 'antd';
 import axios from 'axios';
 import ReactEcharts from 'echarts-for-react';
 import ButtonGroup from 'antd/lib/button/button-group';
 
 
-const { Option } = Select;
 const {Title} = Typography;
-const {Header, Sider, Content, Footer} = Layout;
-const logo = require('./imagens/viagem.svg');
+const {Header, Content} = Layout;
 
+class Linhas extends React.Component{
+    constructor(props){
+      super(props);
+
+    };     
+    render(){
+      return(
+        this.props.lista.map((a) => {
+          return (
+            <tr key={a.id}>
+              <td>{a.nome}</td>     
+              <td>{a.estrela}</td>     
+              <td>{a.uf}</td>                                  
+            </tr>
+                );
+              })
+            );
+          };
+    }
 
 export default class Home extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-        lista: [ ],listaNova:[],
+        lista: [],
         dataA: [60, 352, 300, 34, 90, 130, 520,800],
         dataB: [20, 100, 30, 50, 90, 130, 600,200],
         dataPizza: [{value:535, name: 'MA'},
@@ -29,9 +42,27 @@ export default class Home extends React.Component{
         {value:510, name: 'PE'},
         {value:634, name: 'RN'},
         {value:735, name: 'CE'},
-        {value:900, name: 'ES'}]
+        {value:900, name: 'ES'}],
+        nome:''
         };
     }    
+    componentWillMount(){
+
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:8080/hoteis')
+        .then(res => {
+            const p = res.data._embedded.hotelList;
+            console.log(p);
+            this.setState({lista: p});
+        });
+    }
+
+    setNome = (evento) => {
+        this.setState({nome: evento.target.value})
+        console.log('evento' + evento);
+    };    
 
     getOptionBar = () => {
         var option = {
@@ -134,7 +165,7 @@ export default class Home extends React.Component{
 
     onBotaoA = () => {
 
-            this.setState({dataA:[500, 512, 561, 34, 321, 221, 33,80]});
+        this.setState({dataA:[500, 512, 561, 34, 321, 221, 33,80]});
     };   
     onBotaoB = () => {
 
@@ -181,6 +212,24 @@ export default class Home extends React.Component{
                         <Button onClick={this.onPizzaRefresh} >Data Pizza</Button>                      
                     </ButtonGroup>   
                 </Layout>   
+                <Layout
+                style={{background: '#fff', height: '400px', width: '50%', textAlign: 'center'}}
+                >
+                  <table className="pure-table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>    
+                      <th>Estrelas</th>                     
+                      <th>Estado</th>                     
+                 
+                    </tr>
+                  </thead>
+                  <tbody>                 
+                  <Linhas lista={this.state.lista} />
+                  </tbody>
+                </table>                 
+
+               </Layout>
             </Content>
         </Layout>           
         );
