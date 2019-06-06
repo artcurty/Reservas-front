@@ -1,19 +1,19 @@
 
 .logo{
   max-width: 100%;
-  height: 200px;
+ height: 200px;
   background-image: url(./imagens/bk3.svg);
   background-position: 0px 10px;
   background-repeat: no-repeat;
   background-size: 100%;
 }
 
-.bk{
-  height: 100vh;  
-  background-image: url(./imagens/bk3.svg);
-  background-repeat: no-repeat;
-  background-size: 60%;
-  background-position: center;
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 
-
+.foguete{
+  transform: rotate(60deg);
+}

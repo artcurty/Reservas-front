@@ -38,96 +38,45 @@ class Passagens extends React.Component {
                   <Title style={{textAlign: 'center' }}>Passagens aéreas</Title>
                 </Header>
             <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{ padding: 50 }}>                   
-                        <Form.Item label={<span> Nome&nbsp; </span> }>                                
+                <Form.Item label={<span> Nome&nbsp; </span> }>                                
                         {getFieldDecorator('nome', {
                             rules: [{ required: true, message: 'Insira o seu nome!', whitespace: true }],})
                         (<Input />)}
-                        </Form.Item>
-                    
-                    <Form.Item label="Select" hasFeedback>
-                    {getFieldDecorator('select', {
-                        rules: [{ required: true, message: 'Please select your country!' }],
-                    })(
-                        <Select placeholder="Please select a country">
-                        <Option value="china">China</Option>
-                        <Option value="usa">U.S.A</Option>
-                        </Select>,
-                    )}
-                    </Form.Item>
+                </Form.Item>
 
-                <Form.Item label="Select[multiple]">
-                {getFieldDecorator('select-multiple', {
-                    rules: [
-                    { required: true, message: 'Please select your favourite colors!', type: 'array' },
-                    ],
-                })(
-                    <Select mode="multiple" placeholder="Please select favourite colors">
-                    <Option value="red">Red</Option>
-                    <Option value="green">Green</Option>
-                    <Option value="blue">Blue</Option>
-                    </Select>,
-                )}
+                <Form.Item label={<span> Sobrenome&nbsp; </span> }>                                
+                        {getFieldDecorator('nome', {
+                            rules: [{ required: true, message: 'Insira o seu sobrenome!', whitespace: true }],})
+                        (<Input />)}
+                </Form.Item>
+                
+                <Form.Item label="Origem" hasFeedback>
+                        {getFieldDecorator('origem', {
+                            rules: [{ required: true, message: 'Please select your country!' }],
+                        })(
+                            <Select placeholder="Please select a country">
+                            <Option value="china">China</Option>
+                            <Option value="usa">U.S.A</Option>
+                            </Select>,
+                        )}
+                </Form.Item>
+                
+                <Form.Item label="Destino" hasFeedback>
+                        {getFieldDecorator('destino', {
+                            rules: [{ required: true, message: 'Please select your country!' }],
+                        })(
+                            <Select placeholder="Please select a country">
+                            <Option value="china">China</Option>
+                            <Option value="usa">U.S.A</Option>
+                            </Select>,
+                        )}
                 </Form.Item>
 
                 <Form.Item label="Passageiros">
-                {getFieldDecorator('passageiros', { initialValue: 1 })(<InputNumber min={1} max={10} />)}
-                <span className="ant-form-text"> passageiros </span>
-                </Form.Item>
-
-                <Form.Item label="Radio.Group">
-                {getFieldDecorator('radio-group')(
-                    <Radio.Group>
-                    <Radio value="a">item 1</Radio>
-                    <Radio value="b">item 2</Radio>
-                    <Radio value="c">item 3</Radio>
-                    </Radio.Group>,
-                )}
-                </Form.Item>
-
-                <Form.Item label="Radio.Button">
-                {getFieldDecorator('radio-button')(
-                    <Radio.Group>
-                    <Radio.Button value="a">item 1</Radio.Button>
-                    <Radio.Button value="b">item 2</Radio.Button>
-                    <Radio.Button value="c">item 3</Radio.Button>
-                    </Radio.Group>,
-                )}
-                </Form.Item>
-
-                <Form.Item label="Checkbox.Group">
-                {getFieldDecorator('checkbox-group', {
-                    initialValue: ['A', 'B'],
-                })(
-                    <Checkbox.Group style={{ width: '100%' }}>
-                    <Row>
-                        <Col span={8}>
-                        <Checkbox value="A">A</Checkbox>
-                        </Col>
-                        <Col span={8}>
-                        <Checkbox disabled value="B">
-                            B
-                        </Checkbox>
-                        </Col>
-                        <Col span={8}>
-                        <Checkbox value="C">C</Checkbox>
-                        </Col>
-                        <Col span={8}>
-                        <Checkbox value="D">D</Checkbox>
-                        </Col>
-                        <Col span={8}>
-                        <Checkbox value="E">E</Checkbox>
-                        </Col>
-                    </Row>
-                    </Checkbox.Group>,
-                )}
-                </Form.Item>
-
-                <Form.Item label="Rate">
-                {getFieldDecorator('rate', {
-                    initialValue: 3.5,
-                })(<Rate />)}
-                </Form.Item>
-
+                        {getFieldDecorator('passageiros', { initialValue: 1 })(<InputNumber min={1} max={10} />)}
+                        <span className="ant-form-text"> passageiros </span>
+                </Form.Item>             
+           
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button type="primary" htmlType="submit">
                         Submit
