@@ -17,6 +17,14 @@ export default class SobreComp extends React.Component{
         listaCompanhias: [],
         listaVoos: [],
         listVooByComp: [],
+        listaCompanhiasID: [],
+        listaCompanhiasNome: [],
+        dataPizza: [{value:535, name: 'MA'},
+        {value:535, name: 'PB'},
+        {value:510, name: 'PE'},
+        {value:634, name: 'RN'},
+        {value:735, name: 'CE'},
+        {value:900, name: 'ES'}],
         nome:''
         };
     }    
@@ -25,9 +33,10 @@ export default class SobreComp extends React.Component{
 
     getCompanhias(){
         axios.get('http://localhost:8080/companhias').then(CompanhiasRes=> {
-            const Companhias = CompanhiasRes.data._embedded.companhiaList;
-           console.log('Companhias',Companhias);
-           this.setState({listaCompanhias: Companhias})
+         const Companhias = CompanhiasRes.data._embedded.companhiaList;          
+           console.log('Companhias',Companhias);  
+           this.setState({listaCompanhias: Companhias});         
+        
         });
     };   
 
@@ -39,10 +48,9 @@ export default class SobreComp extends React.Component{
             });  
     };
 
-    
     getVoosByComp(id_comp){        
         axios.get('http://localhost:8080/companhias/'+id_comp+'/voos').then(CompVooRes=> {
-            const CompanhiasV = CompVooRes.data._embedded;
+            const CompanhiasV = CompVooRes.data._embedded.vooList;
            console.log('Voo por companhia',CompanhiasV);
            this.setState({listVooByComp: CompanhiasV})
         });
@@ -51,9 +59,8 @@ export default class SobreComp extends React.Component{
     componentDidMount(){             
       this.getCompanhias();
       this.getVoos();  
-      this.getVoosByComp();              
+      this.getVoosByComp(234);              
     };
-   
 
     setNome = (evento) => {
         this.setState({nome: evento.target.value})
@@ -174,9 +181,10 @@ export default class SobreComp extends React.Component{
                       {value:222, name: 'PE'},
                       {value:494, name: 'RN'},
                       {value:805, name: 'CE'},
-                      {value:1000, name: 'ES'}
-        ]});
-        this.getVoosByComp(434);
+                      {value:1000, name: 'ES'}]});
+    
+    console.log('Teste',this.state.listaVoos.map((a)=> a.nome));
+    
     };
 
     render(){
