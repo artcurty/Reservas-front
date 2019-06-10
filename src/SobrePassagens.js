@@ -1,20 +1,17 @@
 import React from 'react';
 import './App.css';
 import 'antd/dist/antd.css'; 
-import { Layout,Button, Typography, Table,  Divider, Tag, Card, Rate} from 'antd';
+import { Layout,Button, Typography, Table} from 'antd';
 import axios from 'axios';
 import ReactEcharts from 'echarts-for-react';
 import ButtonGroup from 'antd/lib/button/button-group';
-import * as echarts from 'echarts';
 
-const {Column, ColumnGroup} = Table;
 const {Title} = Typography;
 const {Header, Content} = Layout;
 
-class Linhas extends React.Component{
+class Voos extends React.Component{
     constructor(props){
       super(props);
-
     };     
     render(){
       return(
@@ -31,12 +28,12 @@ class Linhas extends React.Component{
             );
           };
     }
-
 export default class SobrePass extends React.Component{
     constructor(props){
         super(props);
         this.state = {
         lista: [],
+        listaCompanhias: [],
         dataA: [60, 352, 300, 34, 90, 130, 520,800],
         dataB: [20, 100, 30, 50, 90, 130, 600,200],
         dataPizza: [{value:535, name: 'MA'},
@@ -49,17 +46,23 @@ export default class SobrePass extends React.Component{
         };
     }    
     componentWillMount(){
-
     }
 
     componentDidMount(){
-        axios.get('http://localhost:8080/voos')
-        .then(res => {
-            const p = res.data._embedded.vooList;
-            console.log(p);
-            this.setState({lista: p});
-        });
+        axios.all([
+            axios.get('http://localhost:8080/voos').then(res => {
+                const p = res.data._embedded.vooList;
+                console.log('Voos',p);
+                this.setState({lista: p});
+            }),
+            axios.get('http://localhost:8080/companhias').then(CompanhiasRes=> {
+                const Companhias = CompanhiasRes.data._embedded.companhiaList;
+               console.log('Companhias',Companhias);
+               this.setState({listaCompanhias: Companhias})
+            })
+        ]);
     }
+    
 
     setNome = (evento) => {
         this.setState({nome: evento.target.value})
@@ -69,7 +72,7 @@ export default class SobrePass extends React.Component{
     getOptionBar = () => {
         var option = {
             title: {
-                text: 'Hoteis',
+                text: 'Voos',
                 subtext: 'Ocupacao',
                 left: 'center'
               },
@@ -127,7 +130,7 @@ export default class SobrePass extends React.Component{
 
         var option = {
           title: {
-              text: 'Hoteis',
+              text: 'Voos',
               subtext: 'Ocupacao',
               left: 'center'
           },
@@ -165,12 +168,11 @@ export default class SobrePass extends React.Component{
       };
     
     getOtionMap = () => {
-     echarts.registerMap('HK', './geoJson/brazil_geo.json');
+    // echarts.registerMap('HK', '/geoJson/brazil_geo,j');
      var option = {
             title: {
-                text: '香港18区人口密度 （2011）',
-                subtext: '人口密度数据来自Wikipedia',
-                sublink: 'http://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E8%A1%8C%E6%94%BF%E5%8D%80%E5%8A%83#cite_note-12'
+                text: 'Fluxo de passagens',
+                subtext: 'Passagens',
             },
             tooltip: {
                 trigger: 'item',
@@ -190,7 +192,7 @@ export default class SobrePass extends React.Component{
             visualMap: {
                 min: 800,
                 max: 50000,
-                text:['High','Low'],
+                text:['Alto','Baixo'],
                 realtime: false,
                 calculable: true,
                 inRange: {
@@ -199,7 +201,7 @@ export default class SobrePass extends React.Component{
             },
             series: [
                 {
-                    name: '香港18区人口密度',
+                    name: 'Grafico',
                     type: 'map',
                     mapType: 'HK', // 自定义扩展图表类型
                     itemStyle:{
@@ -254,10 +256,6 @@ export default class SobrePass extends React.Component{
         return option;
     }  
 
-
-
-
-
     onBotaoA = () => {
 
         this.setState({dataA:[500, 512, 561, 34, 321, 221, 33,80]});
@@ -300,7 +298,6 @@ export default class SobrePass extends React.Component{
               key:'valor',
             }
           ];
-
         return(                      
         <Layout style={{ background: '#fff', padding: 50 }}>
             <Header style={{ background: '#fff', padding: 0 }}>
@@ -328,11 +325,7 @@ export default class SobrePass extends React.Component{
                 </Layout>   
                 <Layout style={{background: '#fff', width: '100%', textAlign: 'center'}}>     
                      <Table columns={columns} dataSource={this.state.lista} />
-               </Layout>
-
-               <Layout style={{background: '#fff', width: '100%', textAlign: 'center'}}>     
-                <ReactEcharts className='gph1' option={this.getOtionMap()} style={{width: '100%'}}/> 
-               </Layout>
+               </Layout>                
             </Content>
         </Layout>           
         );

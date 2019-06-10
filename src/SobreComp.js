@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'antd/dist/antd.css'; 
-import { Layout,Button, Typography, Table,  Divider, Tag, Card, Rate} from 'antd';
+import { Layout,Button, Typography, Table} from 'antd';
 import axios from 'axios';
 import ReactEcharts from 'echarts-for-react';
 import ButtonGroup from 'antd/lib/button/button-group';
@@ -9,54 +9,51 @@ import ButtonGroup from 'antd/lib/button/button-group';
 const {Title} = Typography;
 const {Header, Content} = Layout;
 
-class Linhas extends React.Component{
-    constructor(props){
-      super(props);
 
-    };     
-    render(){
-      return(
-        this.props.lista.map((a) => {
-          return (
-            <tr key={a.id}>
-              <td>{a.nome}</td>     
-              <td>{a.estrela}</td>     
-              <td>{a.uf}</td>                                  
-            </tr>
-                );
-              })
-            );
-          };
-    }
-
-export default class Home extends React.Component{
+export default class SobreComp extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-        lista: [],
-        dataA: [60, 352, 300, 34, 90, 130, 520,800],
-        dataB: [20, 100, 30, 50, 90, 130, 600,200],
-        dataPizza: [{value:535, name: 'MA'},
-        {value:535, name: 'PB'},
-        {value:510, name: 'PE'},
-        {value:634, name: 'RN'},
-        {value:735, name: 'CE'},
-        {value:900, name: 'ES'}],
+        listaCompanhias: [],
+        listaVoos: [],
+        listVooByComp: [],
         nome:''
         };
     }    
     componentWillMount(){
-
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:8080/hoteis')
-        .then(res => {
-            const p = res.data._embedded.hotelList;
-            console.log(p);
-            this.setState({lista: p});
+    getCompanhias(){
+        axios.get('http://localhost:8080/companhias').then(CompanhiasRes=> {
+            const Companhias = CompanhiasRes.data._embedded.companhiaList;
+           console.log('Companhias',Companhias);
+           this.setState({listaCompanhias: Companhias})
         });
-    }
+    };   
+
+    getVoos(){
+        axios.get('http://localhost:8080/voos').then(res => {
+            const Voos = res.data._embedded.vooList;
+            console.log('Voos',Voos);
+            this.setState({listaVoos: Voos});
+            });  
+    };
+
+    
+    getVoosByComp(id_comp){        
+        axios.get('http://localhost:8080/companhias/'+id_comp+'/voos').then(CompVooRes=> {
+            const CompanhiasV = CompVooRes.data._embedded;
+           console.log('Voo por companhia',CompanhiasV);
+           this.setState({listVooByComp: CompanhiasV})
+        });
+    };
+   
+    componentDidMount(){             
+      this.getCompanhias();
+      this.getVoos();  
+      this.getVoosByComp();              
+    };
+   
 
     setNome = (evento) => {
         this.setState({nome: evento.target.value})
@@ -65,9 +62,8 @@ export default class Home extends React.Component{
 
     getOptionBar = () => {
         var option = {
-    
             title: {
-                text: 'Hoteis',
+                text: 'Voos',
                 subtext: 'Ocupacao',
                 left: 'center'
               },
@@ -125,8 +121,8 @@ export default class Home extends React.Component{
 
         var option = {
           title: {
-              text: 'Hoteis',
-              subtext: 'Ocupacao',
+              text: 'Companhias',
+              subtext: 'Voos',
               left: 'center'
           },
           tooltip : {
@@ -138,16 +134,16 @@ export default class Home extends React.Component{
               // top: 'middle',
               bottom: 10,
               left: 'center',
-              data: ['PB', 'PE','RN','MA','CE']
+              data: []
           },
           series : [
               {
-                  name:'Vendas',
+                  name:'Voos',
                   type: 'pie',
                   radius : '65%',
                   center: ['50%', '50%'],
                   selectedMode: 'single',
-                  data: this.state.dataPizza
+                  data: []
                   ,
                   itemStyle: {
                       emphasis: {
@@ -161,6 +157,7 @@ export default class Home extends React.Component{
       };    
           return option;
       };
+  
 
     onBotaoA = () => {
 
@@ -179,6 +176,7 @@ export default class Home extends React.Component{
                       {value:805, name: 'CE'},
                       {value:1000, name: 'ES'}
         ]});
+        this.getVoosByComp(434);
     };
 
     render(){
@@ -187,20 +185,8 @@ export default class Home extends React.Component{
               title: 'Nome',
               dataIndex: 'nome',
               key: 'nome'
-            },
-            {
-              title: 'Estado',
-              dataIndex: 'uf',
-              key: 'uf',
-            },
-            {
-              title: 'Estrelas',
-              dataIndex: 'estrela',
-              key: 'estrela',
-              render: estrela => <Rate value={estrela}/>,
             }
           ];
-
         return(                      
         <Layout style={{ background: '#fff', padding: 50 }}>
             <Header style={{ background: '#fff', padding: 0 }}>
@@ -208,6 +194,10 @@ export default class Home extends React.Component{
             </Header>
            
             <Content style={{padding: 50 }}>
+               <Layout style={{background: '#fff', width: '30%', textAlign: 'center'}}>     
+                     <Table columns={columns} dataSource={this.state.listaCompanhias} />
+               </Layout>    
+               
                 <Layout style={{background: '#fff',float: 'left', height: '400px', width: '50%', textAlign: 'center'}} >
                     <ReactEcharts className='gph1' option={this.getOptionBar()} style={{width: '100%'}}/> 
                     <ButtonGroup>
@@ -225,10 +215,7 @@ export default class Home extends React.Component{
                      <ButtonGroup>
                         <Button onClick={this.onPizzaRefresh} >Data Pizza</Button>                      
                     </ButtonGroup>   
-                </Layout>   
-                <Layout style={{background: '#fff', width: '100%', textAlign: 'center'}}>     
-                     <Table columns={columns} dataSource={this.state.lista} />
-               </Layout>
+                </Layout>                              
             </Content>
         </Layout>           
         );

@@ -9,6 +9,7 @@ import Pacotes from './Pacotes';
 import Home from './Home';
 import SobreHosp from './SobreHospedagens'
 import SobrePass from './SobrePassagens'
+import SobreComp from './SobreComp'
 
 
 const {Sider, Content} = Layout;
@@ -74,11 +75,15 @@ export default class App extends React.Component {
                 
               <Menu.Item key="5">
                 <Link to="/sobrepass"/>
-                  <Icon type="pie-chart"/>Sobre
-              </Menu.Item>            
+                  <Icon type="pie-chart"/>Voos
+              </Menu.Item>        
+              <Menu.Item key="6">
+                <Link to="/sobrecomp"/>
+                  <Icon type="pie-chart"/>Companhias
+              </Menu.Item>      
             </SubMenu>            
 
-            <Menu.Item key="6">
+            <Menu.Item key="7">
               <Link to="/pacotes"/>
               <Icon type="pie-chart" />
               <span>Pacotes de viagens</span>
@@ -99,6 +104,7 @@ export default class App extends React.Component {
 
             <Route path="/passagens/" component={Passagens} />
             <Route path="/sobrepass/" component={SobrePass} />
+            <Route path="/sobrecomp/" component={SobreComp} />
 
             <Route path="/pacotes/" component={Pacotes} />           
 

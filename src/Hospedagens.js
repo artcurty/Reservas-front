@@ -1,12 +1,10 @@
 import React from 'react';
-import {Form, Select, InputNumber, Switch, Radio, Slider, Button, Upload,   
-     Icon, Rate, Checkbox, Row, Col, Layout, Typography, Input} from 'antd';
+import {Form, Select, InputNumber, Radio, Button, Rate,  Layout, Typography, Input} from 'antd';
 import './App.css';
-import { relative } from 'path';
+
 import axios from 'axios';
 
-     const { Option } = Select;
-     const {Header, Content} = Layout;
+     const {Header} = Layout;
      const { Title } = Typography;
 
 class Hospedagens extends React.Component {
