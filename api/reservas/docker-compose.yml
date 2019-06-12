@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  db:
+    image: mysql
+    environment:
+      - "MYSQL_ALLOW_EMPTY_PASSWORD=true"
+
+    expose:
+      - "3306"
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - my-datavolume:/var/lib/mysql
+
+volumes:
+  my-datavolume:
+
+
