@@ -10,17 +10,17 @@ public class Cliente {
     private int idade;
     private String sexo;
     @ManyToOne
-    private Pacotes pacotes;
+    private Reserva reserva;
 
         public Cliente(){
 
         }
 
-        public Cliente(String nome, int idade, String sexo, Pacotes pacotes) {
+        public Cliente(String nome, int idade, String sexo, Reserva reserva) {
             this.nome = nome;
             this.idade = idade;
             this.sexo = sexo;
-            this.pacotes = pacotes;
+            this.reserva = reserva;
         }
 
         public Cliente(String nome, int idade, String sexo) {
@@ -61,12 +61,11 @@ public class Cliente {
                 this.sexo = sexo;
             }
 
-            public Pacotes getPacotes() {
-                return pacotes;
+            public Reserva getReserva() {
+                return reserva;
             }
-
-            public void setPacotes(Pacotes pacotes) {
-                this.pacotes = pacotes;
+            public void setReserva(Reserva reserva) {
+                this.reserva = reserva;
             }
 }
 

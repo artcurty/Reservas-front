@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-public class ClienteController
-{
+public class ReservaController {
+
 
 
 }
-
