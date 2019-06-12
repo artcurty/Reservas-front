@@ -50,12 +50,12 @@ export default class SobrePass extends React.Component{
 
     componentDidMount(){
         axios.all([
-            axios.get('http://localhost:8080/voos').then(res => {
+            axios.get('http://localhost:7070/voos').then(res => {
                 const p = res.data._embedded.vooList;
                 console.log('Voos',p);
                 this.setState({lista: p});
             }),
-            axios.get('http://localhost:8080/companhias').then(CompanhiasRes=> {
+            axios.get('http://localhost:7070/companhias').then(CompanhiasRes=> {
                 const Companhias = CompanhiasRes.data._embedded.companhiaList;
                console.log('Companhias',Companhias);
                this.setState({listaCompanhias: Companhias})

@@ -12,23 +12,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ReservasApplication {
 
-	private  static final Logger log = LoggerFactory.getLogger(ReservasApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReservasApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder){
-		return builder.build();
-	}
-
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		return args -> {
-			Reserva reserva = restTemplate.getForObject(
-					"http://localhost:8080/hoteis",Reserva.class);
-			log.info(reserva.toString());
-		};
-	}
 }

@@ -19,7 +19,7 @@ class Hospedagens extends React.Component {
     
    
     componentDidMount() {   
-        axios.get('http://localhost:8080/hoteis')
+        axios.get('http://localhost:7075/hoteis')
           .then(res => {
             const p = res.data;
             console.log(p);

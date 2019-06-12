@@ -32,7 +32,7 @@ export default class SobreComp extends React.Component{
     }
 
     getCompanhias(){
-        axios.get('http://localhost:8080/companhias').then(CompanhiasRes=> {
+        axios.get('http://localhost:7070/companhias').then(CompanhiasRes=> {
          const Companhias = CompanhiasRes.data._embedded.companhiaList;          
            console.log('Companhias',Companhias);  
            this.setState({listaCompanhias: Companhias});         
@@ -41,25 +41,15 @@ export default class SobreComp extends React.Component{
     };   
 
     getVoos(){
-        axios.get('http://localhost:8080/voos').then(res => {
+        axios.get('http://localhost:7070/voos').then(res => {
             const Voos = res.data._embedded.vooList;
             console.log('Voos',Voos);
             this.setState({listaVoos: Voos});
             });  
-    };
-
-    getVoosByComp(id_comp){        
-        axios.get('http://localhost:8080/companhias/'+id_comp+'/voos').then(CompVooRes=> {
-            const CompanhiasV = CompVooRes.data._embedded.vooList;
-           console.log('Voo por companhia',CompanhiasV);
-           this.setState({listVooByComp: CompanhiasV})
-        });
-    };
-   
+    };   
     componentDidMount(){             
       this.getCompanhias();
       this.getVoos();  
-      this.getVoosByComp(234);              
     };
 
     setNome = (evento) => {
